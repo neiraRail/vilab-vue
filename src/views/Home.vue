@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="4"> <!-- This will take up 1/3 of the parent container's width -->
+      <v-col cols="6"> <!-- This will take up 1/3 of the parent container's width -->
         <v-card elevation="5">
-          <v-chart class="chart" :option="option" />
+          <v-chart class="chart" :option="option"/>
         </v-card>
       </v-col>
       <!-- Other columns/cards can go here -->
@@ -67,7 +67,7 @@ const option = ref({
   },
   grid: {
     left: '3%',
-    right: '50%',
+    right: '3%',
     bottom: '3%',
     containLabel: true
   },
