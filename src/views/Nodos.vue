@@ -1,6 +1,6 @@
 <template>
-    <v-data-table-server items-per-page="-1" :headers="headers" :items-length="serverItems.length" :items="serverItems"
-        :loading="loading" :search="search" class="elevation-1" item-value="name" @update:options="loadItems" hover>
+    <v-data-table items-per-page="-1" :headers="headers" :items-length="nodeStore.nodes.length" :items="nodeStore.nodes"
+        :loading="nodeStore.nodes.length<=0" :search="search" class="elevation-1" item-value="name" hover>
 
         <template v-slot:item.active="{ item }">
             <div class="other">
@@ -12,14 +12,16 @@
             </div>
         </template>
 
-    </v-data-table-server>
+    </v-data-table>
 </template>
 
 <script setup>
-import { VDataTableServer } from 'vuetify/labs/VDataTable'
+import { VDataTable } from 'vuetify/labs/VDataTable'
 import { ref } from 'vue'
-import nodoService from '@/services/nodo.service'
 import { useRouter } from 'vue-router'
+import { useNodeStore } from '@/stores/nodeStore.js'
+
+const nodeStore = useNodeStore();
 
 const router = useRouter()
 
@@ -32,24 +34,17 @@ const headers = ref([
     { title: 'Activo', key: 'active', align: 'end' }
 ])
 const search = ref('')
-const serverItems = ref([])
 const loading = ref(true)
 
 // Load items function
-const loadItems = async ({ sortBy }) => {
-    loading.value = true
-    const { data } = await nodoService.getAll()
-    serverItems.value = data
-    loading.value = false
-}
 
-function goToConfig(){
+function goToConfig() {
 
 }
 
-function goToLiveData(node){
-    router.push({
-        name: 'Home'
+function goToLiveData(node) {
+    router.push({ 
+        name: "LiveData"
     })
 }
 </script>
