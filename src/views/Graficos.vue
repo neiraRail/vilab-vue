@@ -3,29 +3,32 @@
     <v-container>
       <v-row>
         <v-col cols="2">
-          <v-combobox :items="nodeIds" variant="solo" density="compact" label="Nodo:"></v-combobox>
+          <v-combobox v-model="nodeStore.selectedNode" :items="nodeIds" variant="solo" density="compact"
+            label="Nodo:"></v-combobox>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col cols="6"> <!-- This will take up 1/3 of the parent container's width -->
-          <v-card elevation="5">
-            <v-chart class="chart" :option="option" autoresize="" />
-          </v-card>
-        </v-col>
-        <v-col cols="6"> <!-- This will take up 1/3 of the parent container's width -->
-          <v-card elevation="5">
-            <v-chart class="chart" :option="option" autoresize="" />
-          </v-card>
-        </v-col>
-        <!-- Other columns/cards can go here -->
-      </v-row>
-      <v-row>
-        <v-col>
-          <v-card elevation="5">
-            <v-chart class="chart" :option="option" autoresize="" />
-          </v-card>
-        </v-col>
-      </v-row>
+      <template v-if="nodeStore.selectedNode">
+        <v-row>
+          <v-col cols="6"> <!-- This will take up 1/3 of the parent container's width -->
+            <v-card elevation="5">
+              <v-chart class="chart" :option="option" autoresize="" />
+            </v-card>
+          </v-col>
+          <v-col cols="6"> <!-- This will take up 1/3 of the parent container's width -->
+            <v-card elevation="5">
+              <v-chart class="chart" :option="option" autoresize="" />
+            </v-card>
+          </v-col>
+          <!-- Other columns/cards can go here -->
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-card elevation="5">
+              <v-chart class="chart" :option="option" autoresize="" />
+            </v-card>
+          </v-col>
+        </v-row>
+      </template>
     </v-container>
     <v-btn @click="add">Hola</v-btn>
   </div>

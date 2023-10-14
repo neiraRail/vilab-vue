@@ -43,6 +43,7 @@ function goToConfig() {
 }
 
 function goToLiveData(node) {
+    nodeStore.setSelectedNode(node)
     router.push({ 
         name: "LiveData"
     })

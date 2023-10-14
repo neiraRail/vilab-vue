@@ -9,12 +9,16 @@ export const useNodeStore = defineStore({
 
     state: () => ({
         nodes: [],
+        selectedNode: null,
         isLoading: true
     }),
 
     getters: {
         getNodeList() {
             return this.nodes;
+        },
+        getSelectedNode(){
+            return this.selectedNode;
         }
     },
 
@@ -32,6 +36,11 @@ export const useNodeStore = defineStore({
 
         getNodeById(nodeId) {
             return this.nodes.find(node => node.id === nodeId);
+        },
+        
+        setSelectedNode(nodeId) {
+            this.selectedNode = nodeId
         }
+
     }
 });
