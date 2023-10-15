@@ -38,8 +38,11 @@ const loading = ref(true)
 
 // Load items function
 
-function goToConfig() {
-
+function goToConfig(node) {
+    nodeStore.setSelectedNode(node)
+    router.push({ 
+        name: "Test"
+    })
 }
 
 function goToLiveData(node) {

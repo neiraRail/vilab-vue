@@ -9,17 +9,12 @@ export const useNodeStore = defineStore({
 
     state: () => ({
         nodes: [],
-        selectedNode: null,
+        selectedNode: "",
         isLoading: true
     }),
 
     getters: {
-        getNodeList() {
-            return this.nodes;
-        },
-        getSelectedNode(){
-            return this.selectedNode;
-        }
+        nodeIds: (state) => state.nodes.map(node => node.node)
     },
 
     actions: {

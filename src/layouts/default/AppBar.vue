@@ -23,7 +23,8 @@ import { ref } from 'vue';
 const drawer = ref(false);
 const menuItems = ref([
   { title: 'Nodos', value: "/Nodos", icon: "mdi-devices" },
-  { title: 'Real-time', value: "/LiveData", icon: "mdi-antenna" }
+  { title: 'Real-time', value: "/LiveData", icon: "mdi-antenna" },
+  { title: 'Testing', value: "/Test", icon: "mdi-test-tube"}
 ]);
 
 const toggleDrawer = () => {

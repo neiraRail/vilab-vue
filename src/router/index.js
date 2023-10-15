@@ -46,6 +46,17 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/Test',
+    component: Default,
+    children: [
+      {
+        path: '',
+        name: 'Test',
+        component: () => import("@/views/Dashboard.vue"),
+      },
+    ],
+  },
 ]
 
 const router = createRouter({
