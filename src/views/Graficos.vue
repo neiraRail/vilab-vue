@@ -3,11 +3,11 @@
     <v-container>
       <v-row>
         <v-col cols="2">
-          <v-combobox v-model="nodeStore.selectedNode" :items="nodeIds" variant="solo" density="compact"
+          <v-combobox v-model="selectedNode" :items="nodeIds" variant="solo" density="compact"
             label="Nodo:"></v-combobox>
         </v-col>
       </v-row>
-      <template v-if="nodeStore.selectedNode">
+      <template v-if="selectedNode !== ''">
         <v-row>
           <v-col cols="6"> <!-- This will take up 1/3 of the parent container's width -->
             <v-card elevation="5">
@@ -40,14 +40,16 @@ import { LineChart } from 'echarts/charts'
 import { TooltipComponent, GridComponent } from 'echarts/components'
 import { CanvasRenderer } from 'echarts/renderers'
 import VChart, { THEME_KEY } from "vue-echarts";
-import { ref, computed } from "vue";
+import { ref} from "vue";
 
 import { useNodeStore } from '@/stores/nodeStore.js'
+import { storeToRefs } from 'pinia'
 
 use([TooltipComponent, GridComponent, LineChart, CanvasRenderer])
 
 const nodeStore = useNodeStore();
-const nodeIds = computed(() => nodeStore.nodes.map(node => node.node));
+
+const { selectedNode, nodeIds } = storeToRefs(nodeStore)
 
 
 var x = [Math.random() * 100];

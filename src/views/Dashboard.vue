@@ -7,16 +7,16 @@
                         label="Nodo:"></v-combobox>
                 </v-col>
                 <v-col>
-                    <v-btn @click="">Add Data</v-btn>
+                    <v-btn @click="hide">Hide Magnetometer</v-btn>
                 </v-col>
             </v-row>
 
             <template v-if="selectedNode !== ''">
                 <v-row>
-                    <v-col cols="6">
+                    <v-col>
                         <real-time-chart :data="gyroData" :selectedNode="nodeStore.selectedNode"></real-time-chart>
                     </v-col>
-                    <v-col cols="6">
+                    <v-col  v-if="mag">
                         <real-time-chart :data="magnData" :selectedNode="nodeStore.selectedNode"></real-time-chart>
                     </v-col>
                     <!-- Other columns/cards can go here -->
@@ -42,6 +42,7 @@ import { onUnmounted } from "vue";
 var socket = null;
 const nodeStore = useNodeStore();
 const { selectedNode, nodeIds } = storeToRefs(nodeStore)
+const mag = ref(true)
 
 const accelData = ref({
     t: [0],
@@ -87,6 +88,10 @@ const resetData = (data) => {
     data.value.z.push(0)
 }
 
+const hide = () => {
+    mag.value = !mag.value
+}
+
 const handleNodeChange = (newNode, oldNode) => {
     if (oldNode !== "") {
         // Disconnect from the old socket
@@ -112,6 +117,12 @@ const handleNodeChange = (newNode, oldNode) => {
             z: data.acc_z
         }
         addMeasure(accelData, measure);
+        measure = {
+            x: data.gyr_x,
+            y: data.gyr_y,
+            z: data.gyr_z
+        }
+        addMeasure(gyroData, measure)
     });
 };
 

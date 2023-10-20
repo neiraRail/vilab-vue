@@ -1,6 +1,6 @@
 <template>
     <v-data-table items-per-page="-1" :headers="headers" :items-length="nodeStore.nodes.length" :items="nodeStore.nodes"
-        :loading="nodeStore.nodes.length<=0" :search="search" class="elevation-1" item-value="name" hover>
+        :loading="nodeStore.isLoading" :search="search" class="elevation-1" item-value="name" hover>
 
         <template v-slot:item.active="{ item }">
             <div class="other">
@@ -29,7 +29,7 @@ const headers = ref([
     { title: 'Detalle', align: 'start', sortable: false, key: 'detail' },
     { title: 'Nodo', key: 'node', align: 'end' },
     { title: 'Lectura', key: 'delay_sensor', align: 'end' },
-    { title: 'Actualización', key: 'delay_update', align: 'end' },
+    { title: 'Actualización', key: 'time_update', align: 'end' },
     { title: 'Reinicio', key: 'time_reset', align: 'end' },
     { title: 'Activo', key: 'active', align: 'end' }
 ])
