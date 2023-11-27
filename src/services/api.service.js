@@ -13,14 +13,13 @@ const apiService = {
   post(route, { params = " ", slug = "" }) {
     //this.setHeader();
     return swisApi.post(`${route}/${slug}`, params).catch(error => {
-      console.log(error)
-      throw new Error(error.response.data.razon);
+      throw error;
     });
   },
   update(route, { params = " ", slug = "" }) {
     //this.setHeader();
     return swisApi.put(`${route}/${slug}`, params).catch(error => {
-      throw new Error(`ApiService Error: ${error}`);
+      throw error;
     });
   },
   get(route, { id = "" }) {
@@ -32,7 +31,7 @@ const apiService = {
   delete(route, { id = "", params = "" }) {
     //this.setHeader();
     return swisApi.delete(`${route}/${id}`, { data: params }).catch(error => {
-      throw new Error(error.response.data.message);
+      throw error;
     });
   }
 }
