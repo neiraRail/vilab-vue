@@ -102,7 +102,7 @@ const handleNodeChange = (newNode, oldNode) => {
     }
 
     // Create a new socket connection
-    socket = io.connect("http://129.151.100.69:8082");
+    socket = io.connect("http://200.13.4.208:8082");
 
     // Other socket setup, like your event listeners, should be repeated here
     socket.on("connect", () => {
