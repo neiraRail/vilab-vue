@@ -159,17 +159,17 @@ const router = useRouter()
 const headers = ref([
     { title: 'Detalle', align: 'start', sortable: false, key: 'detail' },
     { title: 'Nodo', key: 'node', align: 'end' },
-    { title: 'Lectura', key: 'delay_sensor', align: 'end' },
+    { title: 'Lectura', key: 'time_sensor', align: 'end' },
     { title: 'Actualización', key: 'time_update', align: 'end' },
     { title: 'Reinicio', key: 'time_reset', align: 'end' },
     { title: 'Activo', key: 'active', align: 'end' }
-])
+])  
 const search = ref('')
 const loading = ref(true)
 const dialogCrear = ref(false)
 const dialogEditar = ref(false)
 const dialogEliminar = ref(false)
-const nuevoJson = ref("{\n\t\"node\": 0,\n\t\"detail\": \"Nodo de pruebas\",\n\t\"ssid\": \"sensor\",\n\t\"password\": \"1234567890\",\n\t\"serverREST\": \"http://129.151.100.69:8080\",\n\t\"serverREST2\": \"a\",\n\t\"delay_sensor\": 100,\n\t\"time_update\": 60,\n\t\"time_reset\": 24,\n\t\"time_event\": 1,\n\t\"active\": 1,\n\t\"batch_size\": 0,\n\t\"token\": 0,\n\t\"start\": 0\n}")
+const nuevoJson = ref('{\n\t"active": 0,\n\t"batch_size": 0,\n\t"detail": "",\n\t"node": ,\n\t"operaciones": [],\n\t"password": "",\n\t"protocol": "udp",\n\t"rest_server": "http://200.13.4.208:8080",\n\t"send_mode": "stream",\n\t"ssid": "",\n\t"start": 0,\n\t"time_reset": 24,\n\t"time_sensor": 100,\n\t"time_update": 10\n}')
 const jsonToEdit = ref("")
 const dialogErrorMessage = ref("")
 const nodeToEdit = ref("")
