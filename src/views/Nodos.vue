@@ -1,9 +1,9 @@
 <template>
     <div class="bg-deep-purple-lighten-4" style="height:100%;">
-        <v-container >
+        <v-container>
             <v-row justify="end">
                 <v-col class="d-flex" cols="4">
-                    <v-spacer />
+                    <v-spacer/>
                     <v-dialog v-model="dialogEditar" persistent width="1024">
                         <template v-slot:activator="{ props }">
                             <v-btn class="mr-3" color="deep-purple-accent-4" v-bind="props">Editar</v-btn>
@@ -179,7 +179,7 @@ const nodeToDelete = ref("")
 function goToConfig(node) {
     nodeStore.setSelectedNode(node)
     router.push({
-        name: "Test"
+        path: "Detalle/"+node
     })
 }
 

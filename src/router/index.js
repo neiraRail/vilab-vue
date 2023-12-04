@@ -4,6 +4,7 @@ import Default from '@/layouts/default/Default.vue'
 import Home from '@/views/Home.vue'
 import Graficos from '@/views/Graficos.vue'
 import Nodos from '@/views/Nodos.vue'
+import Detalle from '@/views/Detalle.vue'
 
 const routes = [
   {
@@ -40,6 +41,18 @@ const routes = [
         path: '',
         name: 'Nodos',
         component: Nodos,
+      },
+    ],
+  },
+  // Vista en detalle de un nodo
+  {
+    path: '/Detalle/:node',
+    component: Default,
+    children: [
+      {
+        path: '',
+        name: 'Detalle',
+        component: Detalle,
       },
     ],
   },
