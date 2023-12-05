@@ -1,6 +1,6 @@
 <template>
     <v-card elevation="5">
-        <v-chart class="chart" :option="chartOption" autoresize="" />
+        <v-chart :style="'height: '+height+'px;'" :option="chartOption" autoresize="" />
     </v-card>
 </template>
   
@@ -14,7 +14,7 @@ import VChart, { THEME_KEY } from "vue-echarts";
 use([TooltipComponent, GridComponent, LineChart, CanvasRenderer])
 
 export default {
-    props: ['data', "selectedNode"],
+    props: ['data', 'height'],
     components: {
         VChart
     },
@@ -40,6 +40,7 @@ export default {
                     containLabel: true
                 },
                 yAxis: {
+                    show: false,
                     splitLine: { show: false },
                 },
                 series: [
@@ -70,8 +71,5 @@ export default {
 </script>
   
 <style scoped>
-.chart {
-    height: 330px;
-}
 </style>
   

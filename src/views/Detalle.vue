@@ -162,7 +162,9 @@
                         </v-toolbar-title>
                     </v-toolbar>
                     <v-card-text>
-                        a
+                        <LiveChart :newNode="node.node" attr="acc" height="100"></LiveChart>
+                        <LiveChart :newNode="node.node" attr="gyr" height="100" class="mt-4"></LiveChart>
+                        <LiveChart :newNode="node.node" attr="mag" height="100" class="mt-4"></LiveChart>
                     </v-card-text>
                 </v-card>
             </v-col>
@@ -174,6 +176,7 @@ import { useNodeStore } from '@/stores/nodeStore.js'
 import service from '@/services/nodo.service';
 import { useRoute } from 'vue-router';
 import { ref, onMounted, computed, nextTick } from 'vue';
+import LiveChart from './LiveChart.vue';
 import router from '@/router';
 
 const nodeStore = useNodeStore();
