@@ -14,16 +14,16 @@
             <template v-if="selectedNode !== ''">
                 <v-row>
                     <v-col>
-                        <real-time-chart :data="gyroData" :selectedNode="nodeStore.selectedNode"></real-time-chart>
+                        <real-time-chart :data="gyroData" height="330"></real-time-chart>
                     </v-col>
                     <v-col  v-if="mag">
-                        <real-time-chart :data="magnData" :selectedNode="nodeStore.selectedNode"></real-time-chart>
+                        <real-time-chart :data="magnData" height="330"></real-time-chart>
                     </v-col>
                     <!-- Other columns/cards can go here -->
                 </v-row>
                 <v-row>
                     <v-col>
-                        <real-time-chart :data="accelData" :selectedNode="nodeStore.selectedNode"></real-time-chart>
+                        <real-time-chart :data="accelData" height="330"></real-time-chart>
                     </v-col>
                 </v-row>
             </template>
@@ -36,6 +36,7 @@ import { ref, watch } from "vue";
 import { useNodeStore } from '@/stores/nodeStore.js'
 import { storeToRefs } from 'pinia'
 import RealTimeChart from './RealTimeChart.vue';
+import LiveChart from './LiveChart.vue';
 import io from "socket.io-client";
 import { onUnmounted } from "vue";
 
