@@ -167,6 +167,13 @@
                         <LiveChart :newNode="node.node" attr="mag" height="100" class="mt-4"></LiveChart>
                     </v-card-text>
                 </v-card>
+                <v-card class="mt-5 pr-4 pl-4" elevation="3">
+                    <v-card-actions>
+                        <v-btn @click="goToDashBoard" variant="tonal" color="deep-purple-accent-4">Raw data</v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn @click="goToFeatures" variant="tonal" color="deep-purple-accent-4">Features</v-btn>
+                    </v-card-actions>
+                </v-card>
             </v-col>
         </v-row>
     </v-container>
@@ -217,13 +224,22 @@ const jsonToEdit = ref("")
 const render = ref(true)
 
 
-async function goToAnterior() {
+function goToAnterior() {
     router.push({ name: 'Detalle', params: { node: nodeStore.nodes[nodeStore.nodes.indexOf(node.value) - 1].node } })
 }
 function goToSiguiente() {
     router.push({ name: 'Detalle', params: { node: nodeStore.nodes[nodeStore.nodes.indexOf(node.value) + 1].node } })
 }
+function goToDashBoard() {
+    router.push({ name: 'Dashboard', params: { node: node.value.node } })
+}
+function goToFeatures() {
+    router.push({ name: 'Features', params: { node: node.value.node } })
+}
 
+onMounted(() => {
+    console.log(node.value)
+})
 
 
 function actualizarTimeSensor() {

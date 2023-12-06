@@ -9,63 +9,28 @@ import Detalle from '@/views/Detalle.vue'
 const routes = [
   {
     path: '/',
-    component: Default,
-    children: [
-      {
-        path: '',
-        name: 'Home',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: Home,
-      },
-    ],
+    component: Home,
   },
   {
     path: '/LiveData',
-    component: Default,
-    children: [
-      {
-        path: '',
-        name: 'LiveData',
-        component: Graficos,
-        props: true
-      },
-    ],
+    component: Graficos,
+    props: true,
   },
   {
     path: '/Nodos',
-    component: Default,
-    children: [
-      {
-        path: '',
-        name: 'Nodos',
-        component: Nodos,
-      },
-    ],
+    component: Nodos,
+    name: "Nodos",
   },
   // Vista en detalle de un nodo
   {
     path: '/Detalle/:node',
-    component: Default,
-    children: [
-      {
-        path: '',
-        name: 'Detalle',
-        component: Detalle,
-      },
-    ],
-  },
+    component: Detalle,
+    name: "Detalle",
+    props: true,
+  },  
   {
-    path: '/Test',
-    component: Default,
-    children: [
-      {
-        path: '',
-        name: 'Test',
-        component: () => import("@/views/Dashboard.vue"),
-      },
-    ],
+    path: '/Dashboard',
+    component: () => import("@/views/Dashboard.vue"),
   },
 ]
 
