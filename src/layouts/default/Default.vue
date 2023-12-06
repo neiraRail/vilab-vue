@@ -42,8 +42,7 @@ await nodeStore.fetchNodes();
 const drawer = ref(false);
 const menuItems = ref([
   { title: 'Nodos', value: "/Nodos", icon: "mdi-devices" },
-  { title: 'Real-time', value: "/LiveData", icon: "mdi-antenna" },
-  { title: 'Testing', value: "/Dashboard", icon: "mdi-test-tube"}
+  { title: 'Real-time', value: "/LiveData", icon: "mdi-antenna" }
 ]);
 
 const toggleDrawer = () => {
