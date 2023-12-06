@@ -237,10 +237,6 @@ function goToFeatures() {
     router.push({ name: 'Features', params: { node: node.value.node } })
 }
 
-onMounted(() => {
-    console.log(node.value)
-})
-
 
 function actualizarTimeSensor() {
     node.value.time_sensor = time_sensor.value

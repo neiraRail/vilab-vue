@@ -5,6 +5,8 @@ import Home from '@/views/Home.vue'
 import Graficos from '@/views/Graficos.vue'
 import Nodos from '@/views/Nodos.vue'
 import Detalle from '@/views/Detalle.vue'
+import Features from '@/views/Features.vue'
+import Dashboard from '@/views/Dashboard.vue'
 
 const routes = [
   {
@@ -27,10 +29,18 @@ const routes = [
     component: Detalle,
     name: "Detalle",
     props: true,
-  },  
+  },
   {
-    path: '/Dashboard',
-    component: () => import("@/views/Dashboard.vue"),
+    path: '/Features/:node',
+    component: Features,
+    name: "Features",
+    props: true,
+  }, 
+  {
+    path: '/Dashboard/:node',
+    component: Dashboard,
+    name: "Dashboard",
+    props: true,
   },
 ]
 
