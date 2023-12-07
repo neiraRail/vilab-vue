@@ -70,7 +70,7 @@ const hola = ref({
     t: [0]
 })
 
-const socket = io.connect("http://localhost:4000");
+const socket = io.connect("http://200.13.4.208:8082");
 socket.on("connect", () => {
     console.log("CONNECTED");
     socket.emit("feature", { node: route.params.node });  // Podria indicar solo acelerómetro
