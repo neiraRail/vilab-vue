@@ -1,6 +1,5 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
-import Default from '@/layouts/default/Default.vue'
 import Home from '@/views/Home.vue'
 import Graficos from '@/views/Graficos.vue'
 import Nodos from '@/views/Nodos.vue'
