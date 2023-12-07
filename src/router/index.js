@@ -1,71 +1,45 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
-import Default from '@/layouts/default/Default.vue'
 import Home from '@/views/Home.vue'
 import Graficos from '@/views/Graficos.vue'
 import Nodos from '@/views/Nodos.vue'
 import Detalle from '@/views/Detalle.vue'
+import Features from '@/views/Features.vue'
+import Dashboard from '@/views/Dashboard.vue'
 
 const routes = [
   {
     path: '/',
-    component: Default,
-    children: [
-      {
-        path: '',
-        name: 'Home',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: Home,
-      },
-    ],
+    component: Home,
   },
   {
     path: '/LiveData',
-    component: Default,
-    children: [
-      {
-        path: '',
-        name: 'LiveData',
-        component: Graficos,
-        props: true
-      },
-    ],
+    component: Graficos,
+    props: true,
   },
   {
     path: '/Nodos',
-    component: Default,
-    children: [
-      {
-        path: '',
-        name: 'Nodos',
-        component: Nodos,
-      },
-    ],
+    component: Nodos,
+    name: "Nodos",
   },
   // Vista en detalle de un nodo
   {
     path: '/Detalle/:node',
-    component: Default,
-    children: [
-      {
-        path: '',
-        name: 'Detalle',
-        component: Detalle,
-      },
-    ],
+    component: Detalle,
+    name: "Detalle",
+    props: true,
   },
   {
-    path: '/Test',
-    component: Default,
-    children: [
-      {
-        path: '',
-        name: 'Test',
-        component: () => import("@/views/Dashboard.vue"),
-      },
-    ],
+    path: '/Features/:node',
+    component: Features,
+    name: "Features",
+    props: true,
+  }, 
+  {
+    path: '/Dashboard/:node',
+    component: Dashboard,
+    name: "Dashboard",
+    props: true,
   },
 ]
 
