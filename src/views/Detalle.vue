@@ -190,7 +190,7 @@ const nodeStore = useNodeStore();
 const route = useRoute();
 
 const node = computed(() => {
-    return nodeStore.nodes.filter((node) => node.node == route.params.node)[0]
+    return nodeStore.nodes.filter((node) => node.n == route.params.node)[0]
 })
 
 const canGoNext = computed(() => {
@@ -215,7 +215,7 @@ const labelsTick = {
     "mqtt1": 3,
     "mqtt2": 4
 }
-const activeSwitch = ref(node.value.active == 1)
+const activeSwitch = ref(node.value.a == 1)
 const protocolSwitch = ref(labelsTick[node.value.protocol])
 const time_sensor = ref(node.value.time_sensor)
 const dialogEditar = ref(false)
@@ -252,7 +252,7 @@ function actualizarProtocolo() {
 }
 
 function toggleActivar(){
-    node.value.active = activeSwitch.value ? 1: 0
+    node.value.a = activeSwitch.value ? 1: 0
     buscarConfig()
     editarNodo()
 }
