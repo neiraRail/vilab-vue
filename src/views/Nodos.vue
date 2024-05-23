@@ -6,7 +6,7 @@
                     <v-spacer/>
                     <v-dialog v-model="dialogEditar" persistent width="1024">
                         <template v-slot:activator="{ props }">
-                            <v-btn class="mr-3" color="deep-purple-accent-4" v-bind="props">Editar</v-btn>
+                            <v-btn class="mr-3" color="deep-purple-accent-4" v-bind="props" disabled>Editar</v-btn>
                         </template>
                         <v-card>
                             <v-card-title>
@@ -47,7 +47,7 @@
                     </v-dialog>
                     <v-dialog v-model="dialogEliminar" persistent width="1024">
                         <template v-slot:activator="{ props }">
-                            <v-btn color="deep-purple-darken-2" v-bind="props">Eliminar</v-btn>
+                            <v-btn color="deep-purple-darken-2" v-bind="props" disabled>Eliminar</v-btn>
                         </template>
                         <v-card>
                             <v-card-title>
@@ -85,7 +85,7 @@
                     <v-spacer />
                     <v-dialog v-model="dialogCrear" persistent width="1024">
                         <template v-slot:activator="{ props }">
-                            <v-btn v-bind="props">
+                            <v-btn v-bind="props" disabled>
                                 Nuevo nodo
                             </v-btn>
                         </template>
@@ -133,7 +133,7 @@
                             </div>
                             <div class="actionButtons">
                                 <v-btn icon="mdi-poll" @click="goToLiveData(item.n)" class="mx-2"></v-btn>
-                                <v-btn icon="mdi-cog" @click="goToConfig(item.n)" dense></v-btn>
+                                <v-btn icon="mdi-cog" @click="goToConfig(item.n)" dense disabled></v-btn>
                             </div>
                         </template>
 
