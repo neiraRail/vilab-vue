@@ -1,5 +1,5 @@
 import ApiService from "@/services/api.service";
-const url = "nodes";
+const url = "nodo";
 export const service = {
     getAll() {
         return ApiService.get(url, { id: "" });

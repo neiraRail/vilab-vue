@@ -127,13 +127,13 @@
                         :items="nodeStore.nodes" :loading="nodeStore.isLoading" :search="search" class="elevation-1"
                         item-value="name" hover>
 
-                        <template v-slot:item.active="{ item }">
+                        <template v-slot:item.a="{ item }">
                             <div class="other">
-                                <span :class="[item.active ? 'dot green' : 'dot red']"></span>
+                                <span :class="[item.a ? 'dot green' : 'dot red']"></span>
                             </div>
                             <div class="actionButtons">
-                                <v-btn icon="mdi-poll" @click="goToLiveData(item.node)" class="mx-2"></v-btn>
-                                <v-btn icon="mdi-cog" @click="goToConfig(item.node)" dense></v-btn>
+                                <v-btn icon="mdi-poll" @click="goToLiveData(item.n)" class="mx-2"></v-btn>
+                                <v-btn icon="mdi-cog" @click="goToConfig(item.n)" dense></v-btn>
                             </div>
                         </template>
 
@@ -158,11 +158,11 @@ const router = useRouter()
 
 const headers = ref([
     { title: 'Detalle', align: 'start', sortable: false, key: 'detail' },
-    { title: 'Nodo', key: 'node', align: 'end' },
-    { title: 'Lectura', key: 'time_sensor', align: 'end' },
-    { title: 'Actualización', key: 'time_update', align: 'end' },
-    { title: 'Reinicio', key: 'time_reset', align: 'end' },
-    { title: 'Activo', key: 'active', align: 'end' }
+    { title: 'Nodo', key: 'n', align: 'end' },
+    { title: 'Lectura', key: 'ts', align: 'end' },
+    { title: 'Actualización', key: 'tu', align: 'end' },
+    { title: 'Reinicio', key: 'tr', align: 'end' },
+    { title: 'Activo', key: 'a', align: 'end' }
 ])  
 const search = ref('')
 const loading = ref(true)

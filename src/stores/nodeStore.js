@@ -22,6 +22,7 @@ export const useNodeStore = defineStore({
             this.isLoading = true
             const { data } = await nodoService.getAll(); // Make sure to import nodoService at the top
             this.setNodes(data);
+            console.log(data)
             if(data) this.isLoading = false
         },
 

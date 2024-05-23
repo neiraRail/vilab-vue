@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://200.13.4.208:8080";
-// const API_URL = "http://localhost:8080";
+// const API_URL = "http://200.13.4.208:8080";
+const API_URL = "http://localhost:8080";
 var swisApi = axios.create({ baseURL: API_URL });
 
 const apiService = {
@@ -24,7 +24,7 @@ const apiService = {
   },
   get(route, { id = "" }) {
     //this.setHeader();
-    return swisApi.get(`${route}/${id}`).catch(error => {
+    return swisApi.get(`${route}${id!=""?"/":""}${id}`).catch(error => {
       throw new Error(`ApiService Error: ${error}`);
     });
   },
