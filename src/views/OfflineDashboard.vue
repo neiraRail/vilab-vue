@@ -3,7 +3,7 @@
         <v-container>
             <v-row>
                 <v-col cols="2">
-                    <v-combobox v-model="selectedNode" :items="nodeIds" variant="solo" density="compact"
+                    <v-combobox v-model="selectedStart" :items="[133,140]" variant="solo" density="compact"
                         label="Nodo:"></v-combobox>
                 </v-col>
                 <v-col>
@@ -37,13 +37,13 @@ import { useNodeStore } from '@/stores/nodeStore.js'
 import { storeToRefs } from 'pinia'
 import RealTimeChart from './RealTimeChart.vue';
 import LiveChart from './LiveChart.vue';
-import io from "socket.io-client";
 import { onUnmounted } from "vue";
+import lecturaService from '@/services/lectura.service';
 
-var socket = null;
 const nodeStore = useNodeStore();
-const { selectedNode, nodeIds } = storeToRefs(nodeStore)
 const mag = ref(true)
+const { selectedNode } = storeToRefs(nodeStore)
+const selectedStart = ref("")
 
 const accelData = ref({
     t: [0],
@@ -93,50 +93,57 @@ const hide = () => {
     mag.value = !mag.value
 }
 
-const handleNodeChange = (newNode, oldNode) => {
-    if (oldNode !== "") {
+
+const handleStartChange = async (newStart, oldStart) => {
+    if (oldStart !== "") {
         // Disconnect from the old socket
-        socket.disconnect();
         resetData(accelData);
         resetData(gyroData);
         resetData(magnData);
     }
 
     // Create a new socket connection
-    // socket = io.connect("http://200.13.4.208:8082");
-    socket = io.connect("http://localhost:8082");
 
     // Other socket setup, like your event listeners, should be repeated here
-    socket.on("connect", () => {
-        console.log("CONNECTED");
-        console.log(newNode);
-        socket.emit("realtime", { node: newNode });  // Use the newNode value
-    });
 
-    socket.on('realtime', async (data) => {
+    let count = 0;
+    let times = 3;
+
+    let nextDataPromise = lecturaService.getLecturasFromNodeStartPaginated(selectedNode.value, newStart, times, 200);
+
+    while (count || times === 3) {
+        let data = (await nextDataPromise).data;
+
         console.log(data.length);
-        if(data.length == 0) return;
-        let measure = {}
 
+        count = data.length;
+        times += 1;
+
+        if (data.length == 0) return;
+
+        // Lanzar la solicitud para el próximo lote de datos
+        nextDataPromise = lecturaService.getLecturasFromNodeStartPaginated(selectedNode.value, newStart, times, 200);
+
+        let measure = {};
         let realTime = performance.now();
         let idealTime = realTime;
 
-        for(let i = 0; i < data.length; i++){
-            let graficarTime = performance.now()
+        for (let i = 0; i < data.length; i++) {
+            let graficarTime = performance.now();
             measure = {
-                tm: data[i].tm,
-                x: data[i].ax,
-                y: data[i].ay,
-                z: data[i].az
-            }
+                 tm: data[i].tm,
+                 x: data[i].ax,
+                 y: data[i].ay,
+                 z: data[i].az
+            };
             addMeasure(accelData, measure);
             measure = {
                 tm: data[i].tm,
                 x: data[i].gx,
                 y: data[i].gy,
                 z: data[i].gz
-            }
-            addMeasure(gyroData, measure)
+            };
+            addMeasure(gyroData, measure);
             graficarTime = performance.now() - graficarTime;
 
             const remainingTime = idealTime + (data[i].dt / 1000) - realTime + graficarTime;
@@ -144,27 +151,22 @@ const handleNodeChange = (newNode, oldNode) => {
             if (remainingTime > 0) {
                 await new Promise(resolve => setTimeout(resolve, remainingTime));
             }
-            
-            //Update real and ideal timers
+
+            // Actualizar los temporizadores real e ideal
             idealTime = idealTime + (data[i].dt / 1000);
-            realTime = performance.now()
-
-            // console.log(idealTime-realTime)
+            realTime = performance.now();
         } // for loop
-        
+    } // while loop
 
+    console.log("FINISHED")
 
-    });
 };
 
-watch(selectedNode, handleNodeChange);
+watch(selectedStart, handleStartChange);
 
 
 // Ensure to disconnect from the socket when the component is unmounted
 onUnmounted(() => {
-    if (socket) {
-        socket.disconnect();
-    }
     console.log("UNMOUNTED")
 });
 </script>

@@ -133,7 +133,7 @@
                             </div>
                             <div class="actionButtons">
                                 <v-btn icon="mdi-poll" @click="goToLiveData(item.n)" class="mx-2"></v-btn>
-                                <v-btn icon="mdi-cog" @click="goToConfig(item.n)" dense disabled></v-btn>
+                                <v-btn icon="mdi-cog" @click="goToWatchSomeLecturas(item.n)" dense></v-btn>
                             </div>
                         </template>
 
@@ -152,6 +152,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useNodeStore } from '@/stores/nodeStore.js'
 import service from '@/services/nodo.service';
+import lecturaService from '@/services/lectura.service';
 
 const nodeStore = useNodeStore();
 const router = useRouter()
@@ -191,7 +192,17 @@ function buscarConfig(node) {
 function goToLiveData(node) {
     nodeStore.setSelectedNode(node)
     router.push({
-        name: "LiveData"
+        name: "Dashboard",
+        params: {
+            node: node
+        }
+    })
+}
+
+function goToWatchSomeLecturas(node) {
+    nodeStore.setSelectedNode(node)
+    router.push({
+        path: "Offline/"+node
     })
 }
 

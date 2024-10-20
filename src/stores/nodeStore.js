@@ -14,7 +14,11 @@ export const useNodeStore = defineStore({
     }),
 
     getters: {
-        nodeIds: (state) => state.nodes.map(node => node.node)
+        nodeIds: (state) => {
+            const ids = state.nodes.map(node => node.n)
+            ids.push(2)
+            return ids
+        }
     },
 
     actions: {

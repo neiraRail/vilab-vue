@@ -31,6 +31,9 @@ export default {
                 xAxis: {
                     name: 'x',
                     splitLine: { show: false },
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    axisLabel: { show: false },
                     data: this.data.t
                 },
                 grid: {

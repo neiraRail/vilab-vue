@@ -28,6 +28,11 @@ const apiService = {
       throw new Error(`ApiService Error: ${error}`);
     });
   },
+  customGet(route, customEnd){
+    return swisApi.get(`${route}/${customEnd}`).catch(error => {
+      throw new Error(`ApiService Error: ${error}`);
+    });
+  },
   delete(route, { id = "", params = "" }) {
     //this.setHeader();
     return swisApi.delete(`${route}/${id}`, { data: params }).catch(error => {

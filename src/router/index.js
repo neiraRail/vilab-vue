@@ -6,6 +6,7 @@ import Nodos from '@/views/Nodos.vue'
 import Detalle from '@/views/Detalle.vue'
 import Features from '@/views/Features.vue'
 import Dashboard from '@/views/Dashboard.vue'
+import Offline from '@/views/OfflineDashboard.vue'
 
 const routes = [
   {
@@ -41,6 +42,12 @@ const routes = [
     name: "Dashboard",
     props: true,
   },
+  {
+    path: '/Offline/:node',
+    component: Offline,
+    name: "Offline",
+    props: true,
+  }
 ]
 
 const router = createRouter({
