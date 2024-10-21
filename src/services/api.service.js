@@ -1,12 +1,12 @@
 import axios from "axios";
 
 // const API_URL = "http://200.13.4.208:8080";
-const API_URL = "http://localhost:8080";
-var swisApi = axios.create({ baseURL: API_URL });
+const API_URL = "http://localhost:5000";
+const swisApi = axios.create({baseURL: API_URL});
 
 const apiService = {
   setHeader() {
-    var token = localStorage.getItem('jwt');
+    const token = localStorage.getItem('jwt');
     swisApi.defaults.headers.common["Authorization"]
       = `Bearer ${token}`;
   },

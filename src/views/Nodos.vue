@@ -147,12 +147,10 @@
 </template>
 
 <script setup>
-import { VDataTable } from 'vuetify/labs/VDataTable'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useNodeStore } from '@/stores/nodeStore.js'
 import service from '@/services/nodo.service';
-import lecturaService from '@/services/lectura.service';
 
 const nodeStore = useNodeStore();
 const router = useRouter()
@@ -164,7 +162,7 @@ const headers = ref([
     { title: 'Actualización', key: 'tu', align: 'end' },
     { title: 'Reinicio', key: 'tr', align: 'end' },
     { title: 'Activo', key: 'a', align: 'end' }
-])  
+])
 const search = ref('')
 const loading = ref(true)
 const dialogCrear = ref(false)

@@ -7,6 +7,7 @@ import Detalle from '@/views/Detalle.vue'
 import Features from '@/views/Features.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import Offline from '@/views/OfflineDashboard.vue'
+import Jobs from '@/views/Jobs.vue'
 
 const routes = [
   {
@@ -35,7 +36,7 @@ const routes = [
     component: Features,
     name: "Features",
     props: true,
-  }, 
+  },
   {
     path: '/Dashboard/:node',
     component: Dashboard,
@@ -46,6 +47,12 @@ const routes = [
     path: '/Offline/:node',
     component: Offline,
     name: "Offline",
+    props: true,
+  },
+  {
+    path: '/Jobs',
+    component: Jobs,
+    name: "Jobs",
     props: true,
   }
 ]
