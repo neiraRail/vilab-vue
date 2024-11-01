@@ -1,6 +1,8 @@
 <template>
-
-  <jobs-table></jobs-table>
+  <div >
+    <jobs-table></jobs-table>
+  </div>
+  
 </template>
 <script>
 

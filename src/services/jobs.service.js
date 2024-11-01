@@ -1,7 +1,7 @@
 // jobs.service.js
 import axios from 'axios';
 
-const apiUrl = "http://localhost:5000/job";
+const apiUrl = "http://localhost:8080/job";
 
 const jobService = {
   async fetchJobs() {

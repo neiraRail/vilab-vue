@@ -25,6 +25,7 @@
             v-for="job in jobs"
             :key="job._id"
             :class="{'table-success': job.a === 1}"
+            @click="viewJob(job)"
           >
             <td>{{ job._id }}</td>
             <td>{{ job.n }}</td>
@@ -117,6 +118,10 @@ export default {
       this.jobData = { ...job };
       this.editingJob = true;
       new bootstrap.Modal(document.getElementById('jobModal')).show();
+    },
+    viewJob(job) {
+      // this.$router.push({ name: 'JobView', params: { id: job._id } });
+      console.log(job)
     },
     async saveJob() {
       try {
