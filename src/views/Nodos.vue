@@ -132,6 +132,8 @@
                                 <span :class="[item.a ? 'dot green' : 'dot red']"></span>
                             </div>
                             <div class="actionButtons">
+                                <v-btn v-if="item.a==0" icon="mdi-power" @click="runNodo(item.n)" dense></v-btn>
+                                <v-btn v-else icon="mdi-stop" @click="stopNodo(item.n)" dense></v-btn>
                                 <v-btn icon="mdi-poll" @click="goToLiveData(item.n)" class="mx-2"></v-btn>
                                 <v-btn icon="mdi-cog" @click="goToWatchSomeLecturas(item.n)" dense></v-btn>
                             </div>
@@ -180,6 +182,25 @@ function goToConfig(node) {
     router.push({
         path: "Detalle/"+node
     })
+}
+
+async function runNodo(node){
+    try {
+        let response = await service.runNodo(node);
+        console.log(response)
+        nodeStore.fetchNodes();
+    } catch (error) {
+        console.error("Error al encender el nodo:", error);
+    }
+}
+
+async function stopNodo(node){
+    try {
+        await service.stopNodo(node);
+        nodeStore.fetchNodes();
+    } catch (error) {
+        console.error("Error al apagar el nodo:", error);
+    }
 }
 
 function buscarConfig(node) {
