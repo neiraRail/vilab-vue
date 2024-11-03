@@ -16,6 +16,7 @@
             <th>Mediciones</th>
             <th>Tiempo (s)</th>
             <th>Retraso (s)</th>
+            <th>Analizar</th>
             <th>Activo</th>
             <th>Acciones</th>
           </tr>
@@ -32,6 +33,7 @@
             <td>{{ job.nm }}</td>
             <td>{{ job.t }}</td>
             <td>{{ job.d }}</td>
+            <td>{{ job.ai }}</td>
             <td>{{ job.a === 1 ? 'Activo' : 'Inactivo' }}</td>
             <td>
               <button v-if="job.a===0" class="btn btn-success btn-sm me-2" @click="startJob(job._id)">Iniciar</button>
@@ -70,6 +72,10 @@
               <div class="mb-3">
                 <label for="retrasoInput" class="form-label">Retraso entre Mediciones (s)</label>
                 <input type="number" class="form-control" v-model="jobData.d" id="retrasoInput" />
+              </div>
+              <div>
+                <label for="aiInput" class="form-label">Activar analisis</label>
+                <input type="number" class="form-control" v-model="jobData.ai" id="aiInput" />
               </div>
             </form>
           </div>
@@ -148,6 +154,10 @@ export default {
       try {
         await jobService.startJob(id);
         this.fetchJobs();
+        // setTimeout(() => {
+        //   console.log("Fetching again...")
+        //   this.fetchJobs();
+        // }, 33000)
       } catch (error) {
         console.error("Error al iniciar el job:", error);
       }
