@@ -8,6 +8,8 @@ import Features from '@/views/Features.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import Offline from '@/views/OfflineDashboard.vue'
 import Jobs from '@/views/Jobs.vue'
+import JobView from '@/views/JobView.vue'
+import JobRunView from '@/views/JobRunView.vue'
 
 const routes = [
   {
@@ -53,6 +55,18 @@ const routes = [
     path: '/Jobs',
     component: Jobs,
     name: "Jobs",
+    props: true,
+  },
+  {
+    path: '/Jobs/:jobid',
+    component: JobView,
+    name: "JobView",
+    props: true,
+  },
+  {
+    path: '/Job/:jobid/:jobrunid',
+    component: JobRunView,
+    name: "JobRunView",
     props: true,
   }
 ]

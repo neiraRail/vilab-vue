@@ -91,7 +91,7 @@
 
 <script>
 import jobService from "@/services/jobs.service"; // Importa el servicio
-
+import { useNodeStore } from '@/stores/nodeStore.js'
 export default {
   data() {
     return {
@@ -104,7 +104,8 @@ export default {
         d: "",
         a: 0,
         ai: 0
-      }
+      },
+      nodeStore: useNodeStore()
     };
   },
   methods: {
@@ -126,8 +127,7 @@ export default {
       new bootstrap.Modal(document.getElementById('jobModal')).show();
     },
     viewJob(job) {
-      // this.$router.push({ name: 'JobView', params: { id: job._id } });
-      console.log(job)
+      this.$router.push({ name: 'JobView', params: { jobid: job._id } });
     },
     async saveJob() {
       try {
@@ -172,7 +172,10 @@ export default {
     }
   },
   mounted() {
-    this.fetchJobs();
+    this.nodeStore.isLoading = true;
+    this.fetchJobs().then(() => {
+      this.nodeStore.isLoading = false;
+    });
   }
 };
 </script>
