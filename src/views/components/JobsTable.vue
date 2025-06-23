@@ -16,7 +16,8 @@
             <th>Mediciones</th>
             <th>Tiempo (s)</th>
             <th>Retraso (s)</th>
-            <th>Analizar</th>
+            <th>AI Monitoreo</th>
+            <th>AI Aprendizaje</th>
             <th>Activo</th>
             <th>Acciones</th>
           </tr>
@@ -33,7 +34,8 @@
             <td>{{ job.nm }}</td>
             <td>{{ job.t }}</td>
             <td>{{ job.d }}</td>
-            <td>{{ job.ai }}</td>
+            <td>{{ job['ai-monitoreo'] }}</td>
+            <td>{{ job['ai-aprendizaje'] }}</td>
             <td>{{ job.a === 1 ? 'Activo' : 'Inactivo' }}</td>
             <td>
               <button v-if="job.a===0" class="btn btn-success btn-sm me-2" @click="startJob(job._id)">Iniciar</button>
@@ -73,9 +75,13 @@
                 <label for="retrasoInput" class="form-label">Retraso entre Mediciones (s)</label>
                 <input type="number" class="form-control" v-model="jobData.d" id="retrasoInput" />
               </div>
+              <div class="mb-3">
+                <label for="aimInput" class="form-label">AI Monitoreo</label>
+                <input type="number" class="form-control" v-model="jobData['ai-monitoreo']" id="aimInput" />
+              </div>
               <div>
-                <label for="aiInput" class="form-label">Activar analisis</label>
-                <input type="number" class="form-control" v-model="jobData.ai" id="aiInput" />
+                <label for="aiaInput" class="form-label">AI Aprendizaje</label>
+                <input type="number" class="form-control" v-model="jobData['ai-aprendizaje']" id="aiaInput" />
               </div>
             </form>
           </div>
@@ -103,7 +109,8 @@ export default {
         t: "",
         d: "",
         a: 0,
-        ai: 0
+        'ai-monitoreo': 0,
+        'ai-aprendizaje': 0
       },
       nodeStore: useNodeStore()
     };
@@ -117,7 +124,7 @@ export default {
       }
     },
     createJob() {
-      this.jobData = { n: "", nm: "", t: "", d: "" };
+      this.jobData = { n: "", nm: "", t: "", d: "", 'ai-monitoreo': 0, 'ai-aprendizaje': 0 };
       this.editingJob = false;
       new bootstrap.Modal(document.getElementById('jobModal')).show();
     },
