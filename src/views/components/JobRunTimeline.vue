@@ -150,9 +150,18 @@ export default {
         // fetch original measures
         let measures = await measuresService.fetchMeasures(this.jobrunid);
         for (let i = 0; i < measures.length; i++) {
+            // check if so is literally "None"
+            if (measures[i].so === "None") {
+                // if so is "None", reuturn data so the box shows a message "Midiendo actualmente..."
+                measures[i]._id = "en proceso...";
+                measures[i].vectors = 0;
+                measures[i].duration = 0;
+            } else 
             if (measures[i].si && measures[i].so) {
                 // fetch data of each measure
-                let data = await measuresService.fetchData(measures[i].n, measures[i].si, measures[i].so);
+                let data = await measuresService.fetchData(measures[i].n, measures[i].si, measures[i].so).catch((error) => {
+                    return [];
+                });
 
                 // duration is the difference between the last and first timestamp
                 if (data.length > 2) {
