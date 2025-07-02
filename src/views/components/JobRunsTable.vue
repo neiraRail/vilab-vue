@@ -10,6 +10,7 @@
             <th>Mediciones</th>
             <th>Tiempo (s)</th>
             <th>Retraso (s)</th>
+            <th>Acciones</th>
           </tr>
           </thead>
           <tbody>
@@ -24,6 +25,9 @@
             <td>{{ jobrun.nm }}</td>
             <td>{{ jobrun.t }}</td>
             <td>{{ jobrun.d }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm" @click.stop="deleteJobrun(jobrun._id)">Eliminar</button>
+            </td>
           </tr>
           </tbody>
         </table>
@@ -47,6 +51,15 @@ export default {
         this.jobruns = await jobrunService.fetchJobruns(jobid);
       } catch (error) {
         console.error("Error al obtener los jobruns:", error);
+      }
+    },
+
+    async deleteJobrun(id) {
+      try {
+        await jobrunService.deleteJobrun(id);
+        this.fetchJobruns(this.jobid);
+      } catch (error) {
+        console.error("Error al eliminar el jobrun:", error);
       }
     },
 

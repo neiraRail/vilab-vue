@@ -2,19 +2,19 @@
     <div class="container my-3">
         <div v-for="(measure, index) in measures" :key="index"
             :class="'row pa-5 ' + (index % 2 ? 'even-row' : 'odd-row')">
-            <div class="col-auto d-flex align-items-start mt-10">
+            <div class="col-auto d-flex align-items-start mt-3">
                 <h5>{{ index }}</h5>
             </div>
             <div class="col">
                 <div :class="'card mb-4 ' + (measure.vectors ? 'hover-effect' : 'blocked')" @click="viewMeasure(index)">
                     <div class="card-body">
                         <h6 class="card-subtitle text-muted">measure {{ measure._id }}</h6>
-                        <div class="empty-space" style="height: 100px; border: 1px dashed #aaa; margin: 15px 0;">
+                        <div v-if="measure.vectors" class="empty-space" style="height: 100px; border: 1px dashed #aaa; margin: 15px 0;">
                         </div>
                     </div>
                 </div>
                 <div v-if="index != measures.length - 1" class="vertical-space d-flex justify-content-center">
-                    <div class="vertical-line"></div>
+                    <div class="vertical-line" :style="{ height: (!measure.vectors || (measures[index + 1] && measures[index + 1].vectors === 0)) ? '20px' : '100px' }"></div>
                 </div>
             </div>
             <div class="col">
@@ -23,8 +23,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal para crear o editar job -->
 
     <div class="modal fade" id="measureModal" tabindex="-1" aria-labelledby="measureModal" aria-hidden="true">
         <div class="modal-dialog">
@@ -53,6 +51,13 @@
                             <div class="col-3">
                                 <div class="row">
                                     <h5>Información sobre la measure</h5>
+                                    <div v-if="selectedMeasure.ai && selectedMeasure.ai.length" class="pt-2">
+                                        <div v-for="(conclusion, i) in selectedMeasure.ai" :key="i" class="d-flex align-items-start mb-2">
+                                            <v-icon v-if="conclusion.tipo === 'Alerta'" icon="mdi-alert-circle-outline" color="red" class="me-2"></v-icon>
+                                            <v-icon v-else icon="mdi-information-outline" color="blue" class="me-2"></v-icon>
+                                            <span>{{ conclusion.mensaje }}</span>
+                                        </div>
+                                    </div>
                                     <div class="d-flex flex-column align-items-center pt-15 text-muted">
                                         <i class="information-off-outline" style="font-size: 2rem;"></i>
                                         <svg-icon type="mdi" :path="path"></svg-icon>
@@ -99,6 +104,7 @@ export default {
                     y: [],
                     z: [],
                 },
+                ai: [],
             },
 
         };
@@ -121,6 +127,7 @@ export default {
 
             // set the new data
             this.selectedMeasure._id = this.measures[index]._id;
+            this.selectedMeasure.ai = this.measures[index].ai || [];
 
             let t = Array.from({ length: this.measures[index].vectors }, (_, i) => i + 1);
             let x = this.measures[index].data.map((v) => v.ax);
@@ -178,6 +185,7 @@ export default {
         }
         this.measures = measures;
         this.nodeStore.isLoading = false;
+        console.log("Measures fetched:", this.measures);
     },
 };
 </script>

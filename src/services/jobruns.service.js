@@ -12,6 +12,15 @@ const jobrunService = {
       console.error("Error al obtener los jobruns:", error);
       throw error;
     }
+  },
+  async deleteJobrun(id) {
+    try {
+      const response = await axios.delete(`${apiUrl}/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error al eliminar el jobrun:", error);
+      throw error;
+    }
   }
 };
 
