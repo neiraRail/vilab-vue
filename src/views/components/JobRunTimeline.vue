@@ -58,11 +58,11 @@
                                             <span>{{ conclusion.mensaje }}</span>
                                         </div>
                                     </div>
-                                    <div class="d-flex flex-column align-items-center pt-15 text-muted">
+                                    <!-- <div class="d-flex flex-column align-items-center pt-15 text-muted">
                                         <i class="information-off-outline" style="font-size: 2rem;"></i>
                                         <svg-icon type="mdi" :path="path"></svg-icon>
                                         <p class="text-center mt-2">No hay análisis disponible para estos datos.</p>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
